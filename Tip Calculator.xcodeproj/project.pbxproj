@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E83C45BF211E1AC0007610E9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83C45BE211E1AC0007610E9 /* SettingsViewController.swift */; };
 		E8B6396B2117988000EAF8A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B6396A2117988000EAF8A4 /* AppDelegate.swift */; };
 		E8B6396D2117988000EAF8A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B6396C2117988000EAF8A4 /* ViewController.swift */; };
 		E8B639702117988000EAF8A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8B6396E2117988000EAF8A4 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E83C45BE211E1AC0007610E9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E8B639672117988000EAF8A4 /* Tip Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tip Calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8B6396A2117988000EAF8A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8B6396C2117988000EAF8A4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				E8B639712117988100EAF8A4 /* Assets.xcassets */,
 				E8B639732117988100EAF8A4 /* LaunchScreen.storyboard */,
 				E8B639762117988200EAF8A4 /* Info.plist */,
+				E83C45BE211E1AC0007610E9 /* SettingsViewController.swift */,
 			);
 			path = "Tip Calculator";
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			files = (
 				E8B6396D2117988000EAF8A4 /* ViewController.swift in Sources */,
 				E8B6396B2117988000EAF8A4 /* AppDelegate.swift in Sources */,
+				E83C45BF211E1AC0007610E9 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,8 +434,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LR89T525C6;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Tip Calculator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -439,6 +443,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Zhu.Tip-Calculator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -448,8 +453,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LR89T525C6;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Tip Calculator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -457,6 +462,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Zhu.Tip-Calculator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
