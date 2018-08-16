@@ -13,8 +13,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        // Load the bill amount from previous if less than 10 mins
+        let defaults = UserDefaults.standard
+        let appClosedBefore = defaults.bool(forKey: "appClosed")
+        if (appClosedBefore)  {
+            let closingTime = defaults.object(forKey: "myClosingTime") as! NSDate
+            let timeInterval = NSDate().timeIntervalSinceReferenceDate - closingTime.timeIntervalSinceReferenceDate
+            if (timeInterval > 600) {
+                defaults.set("", forKey: "myBill")
+            }
+            defaults.set(false, forKey: "appClosed")
+            defaults.synchronize()
+        }
+        
         // Override point for customization after application launch.
         return true
     }
@@ -39,8 +52,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
 
+        // Save closing app time
+        let defaults = UserDefaults.standard
+        defaults.set(NSDate(), forKey: "myClosingTime")
+        defaults.set(true, forKey: "appClosed")
+        defaults.synchronize()
+    }
 
 }
 

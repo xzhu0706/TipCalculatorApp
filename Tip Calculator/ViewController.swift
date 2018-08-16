@@ -10,14 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var tipControl: UISlider!
     @IBOutlet weak var billField: UITextField!
-    @IBOutlet weak var totalLabel: UILabel!
-    @IBOutlet weak var tipLabel: UILabel!
+    @IBOutlet weak var tipControl: UISlider!
+    @IBOutlet weak var splitControl: UISlider!
     @IBOutlet weak var tipPercentLabel: UILabel!
     @IBOutlet weak var splitNumberLabel: UILabel!
+    @IBOutlet weak var tipLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var splitLabel: UILabel!
-    @IBOutlet weak var splitControl: UISlider!
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,36 +28,59 @@ class ViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("view will appear")
         
-        // update tip percentage to its default
-        let defaults = UserDefaults.standard
+        // Update tip percentage to its default
         let defaultTipPercent = defaults.integer(forKey: "myDefaultTip")
         tipControl.setValue(Float(defaultTipPercent), animated: true)
         tipPercentLabel.text = "\(defaultTipPercent)%"
+        
+        // Update theme to its default
+        let defaultTheme = defaults.integer(forKey: "myDefaultTheme")
+        if (defaultTheme == 0) {
+            self.view.backgroundColor = UIColor(red:0.90, green:1.00, blue:0.96, alpha:1.0)
+        } else {
+            self.view.backgroundColor = UIColor(red:0.33, green:0.33, blue:0.33, alpha:1.0)
+        }
+        
+        // Display currency symbol in the text field before entering amount
+        billField.placeholder = Locale.current.currencySymbol
+        
+        // Load bill from previous input
+        billField.text = defaults.string(forKey: "myBill")
+        
+        // Calculate tip
+        calculateTip(self)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
- 
+
     @IBAction func calculateTip(_ sender: Any) {
         let bill = Double(billField.text!) ?? 0
         let tipPercentage = Double(Int(tipControl.value)) * 0.01
         let split = Int(splitControl.value)
-        tipPercentLabel.text = "\(Int(tipControl.value))%"
-        splitNumberLabel.text = "\(split)"
         let tip = bill * tipPercentage
         let total = bill + tip
         let splitTotal = total / Double(split)
-        tipLabel.text = String(format:"%.2f", tip)
-        totalLabel.text = String(format:"%.2f", total)
-        splitLabel.text = String(format:"%.2f", splitTotal)
         
+        // Set format of locale currency
+        let formatter = NumberFormatter()
+        formatter.usesGroupingSeparator = true
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currency
+        
+        // Update the labels
+        tipPercentLabel.text = "\(Int(tipControl.value))%"
+        splitNumberLabel.text = "\(split)"
+        tipLabel.text = formatter.string(from: NSNumber(value: tip))
+        totalLabel.text = formatter.string(from: NSNumber(value: total))
+        splitLabel.text = formatter.string(from: NSNumber(value: splitTotal))
+        
+        // Save bill to remember
+        defaults.set(billField.text, forKey: "myBill")
+        defaults.synchronize()
     }
     
+    @IBAction func onTap(_ sender: Any) {
+        // Close the decimal pad
+        view.endEditing(true)
+    }
     
-
 }
-
